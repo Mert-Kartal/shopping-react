@@ -1,18 +1,30 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { shops, categories } from "../types";
-export const AddProductForm = () => {
+import {
+  shops,
+  categories,
+  type Product,
+  type AddProductFormProps,
+} from "../types";
+import { nanoid } from "nanoid";
+export const AddProductForm = ({ onAdd }: AddProductFormProps) => {
   const [name, setName] = useState<string>("");
   const [shop, setShop] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
-  function handleAddProduct(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
+  function handleAdd() {
     console.log(name, shop, category);
     if (!name || !shop || !category) {
       alert("Please fill all the fields");
       return;
     }
+
+    onAdd({
+      id: nanoid(),
+      name,
+      shop: shop as Product["shop"],
+      category: category as Product["category"],
+    });
   }
 
   return (
@@ -59,7 +71,7 @@ export const AddProductForm = () => {
         </Form.Control>
       </Form.Group>
 
-      <Button onClick={handleAddProduct}>Add Product</Button>
+      <Button onClick={handleAdd}>Add Product</Button>
     </>
   );
 };
