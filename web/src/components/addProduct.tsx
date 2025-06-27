@@ -25,6 +25,10 @@ export const AddProductForm = ({ onAdd }: AddProductFormProps) => {
       shop: shop as Product["shop"],
       category: category as Product["category"],
     });
+
+    setName("");
+    setShop("");
+    setCategory("");
   }
 
   return (
