@@ -13,10 +13,28 @@ function App() {
     console.log(products);
   };
 
+  const handleMarkAsBought = (id: string) => {
+    setProducts(
+      products.map((product) =>
+        product.id === id
+          ? { ...product, isBought: !product.isBought }
+          : product
+      )
+    );
+  };
+
+  const handleDeleteProduct = (id: string) => {
+    setProducts(products.filter((product) => product.id !== id));
+  };
+
   return (
     <>
       <AddProductForm onAdd={handleAddProduct} />
-      <ProductTable products={products} />
+      <ProductTable
+        products={products}
+        onDelete={handleDeleteProduct}
+        onToggleBought={handleMarkAsBought}
+      />
     </>
   );
 }

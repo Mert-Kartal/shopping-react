@@ -20,4 +20,6 @@ export interface AddProductFormProps {
 
 export interface ProductTableProps {
   products: Product[];
+  onDelete: (id: string) => void;
+  onToggleBought: (id: string) => void;
 }
